@@ -13,7 +13,7 @@ class _LocationState extends State<Location> {
     //Get the data from the previous screen i.e. /home; List of all locations is passed
     // Map data = ModalRoute.of(context).settings.arguments;
     // Locations.getData();
-    List<WorldTime> locations = Locations.locations;
+    List<WorldTime>? locations = Locations.locations;
     //If there was some issue in fetching locations list from api then set it to some test data
     //Although this would only happen if the link text is changed
     if (locations == null) {
@@ -35,7 +35,7 @@ class _LocationState extends State<Location> {
                 //If a tile is tapped then fetch the time data of the corresponding location
                 //Also pop the current choose_location from route
                 onTap: () async {
-                  WorldTime instance = locations[index];
+                  WorldTime instance = locations![index];
                   //Network request for time data from api
                   if(instance.gmtOffset == null) await instance.getData();
                   //Pop and return the fetched time data
@@ -46,7 +46,7 @@ class _LocationState extends State<Location> {
                     'list_of_all_locations' : locations,
                   });
                 },
-                title: Text(locations[index].location),
+                title: Text(locations![index].location),
                 subtitle: Text("GMT Offset :- ${locations[index].gmtOffset}"),
               ),
             );

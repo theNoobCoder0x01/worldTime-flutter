@@ -5,10 +5,10 @@ class WorldTime implements Comparable<WorldTime> {
 
   String location; //Location name for the UI
   String countryName;
-  int gmtOffset;
+  int? gmtOffset;
   String url; //Location url for api endpoint
 
-  WorldTime({ this.location, this.url, this.countryName });
+  WorldTime({ required this.location, required this.url, required this.countryName });
 
   Future<void> getData() async {
     print("In file lib/services/world_time.dart\n" +
@@ -18,8 +18,8 @@ class WorldTime implements Comparable<WorldTime> {
       //Make the network request and convert the data to a map
       // Map data = jsonDecode((await get('http://worldtimeapi.org/api/timezone/$url')).body);
       print(this.url);
-      Map data = jsonDecode((await get(this.url)).body);
-      this.gmtOffset = data['zones'][0]['gmtOffset'];
+      Map data = jsonDecode((await get(Uri.parse(url))).body);
+      this.gmtOffset = (data['zones'][0]['gmtOffset']) ?? 0;
       print(this.gmtOffset);
     }
     catch(e) {

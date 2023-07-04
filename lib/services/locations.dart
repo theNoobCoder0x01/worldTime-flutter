@@ -4,7 +4,7 @@ import 'package:worldtime/services/world_time.dart';
 
 class Locations {
 
-  static List<WorldTime> locations;
+  static List<WorldTime>? locations;
 
   static Future<void> getData() async {
     print("In file lib/services/locations.dart\n" +
@@ -13,7 +13,7 @@ class Locations {
     try {
       const String api_url = 'http://api.timezonedb.com/v2.1/list-time-zone?key=V9BZU01KHECS&format=json';
       // String api_url = 'http://worldtimeapi.org/api/timezone';
-      String response = (await get(api_url)).body;
+      String response = (await get(Uri.parse(api_url))).body;
       //Creates a List of Strings with url of the locations
       dynamic timeZones = jsonDecode(response);
 
@@ -27,11 +27,11 @@ class Locations {
             locate += lo + ", ";
           }
           locate = locate.substring(0, locate.length - 2);
-          locations.add(WorldTime(location: locate,
+          locations?.add(WorldTime(location: locate,
               url: "$api_url&zone=${zone['zoneName']}&fields=gmtOffset",
               countryName: "${zone['countryName']} (${zone['countryCode']})"));
         }
-        locations[index].gmtOffset = zone["gmtOffset"];
+        locations?[index].gmtOffset = zone["gmtOffset"];
         index++;
       }
     }
