@@ -7,5 +7,5 @@ _Made this app while learning to code in flutter from a tutorial on YouTube by t
 - By default it shows the current time as per the device's set time.
 
 - The App is little different from the one in tutorial, I used a different API as I found it easier to use.
-- I have made the app so as to update the every second instead of every minute.
+- I have made the app so as to update time every second instead of every minute.
 - This made it more accurate and hence more useful.
